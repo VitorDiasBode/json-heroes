@@ -8,7 +8,7 @@ async function populate() {
     console.log(superheroes);
     
     populateHeader(superheroes);
-    // populateHeroes(superheroes);
+    populateHeroes(superheroes);
 }
 
 populate();
@@ -24,4 +24,39 @@ function populateHeader(obj) {
     p.textContent = `Hometown: ${obj.homeTown} // Formed: ${obj.formed}`;
     header.appendChild(p);
 
+}
+
+function populateHeroes(obj) {
+    const section = document.querySelector("section");
+    const heroes = obj.members;
+
+    for (const hero of heroes) {
+        const article = document.createElement("article");
+        const h2 = document.createElement("h2");
+        const p1 = document.createElement("p");
+        const p2 = document.createElement("p");
+        const p3 = document.createElement("p");
+        const uList = document.createElement("ul");
+
+        h2.textContent = hero.name;
+        p1.textContent = `Secret identity: ${hero.secretIdentity}`;
+        p2.textContent = `Age: ${hero.age}`;
+        p3.textContent = `Superpowers:`;
+
+        const superPowers = hero.powers;
+        for (const power of superPowers) {
+            const listItem = document.createElement("li");
+            listItem.textContent = power;
+            
+            uList.appendChild(listItem);
+        }
+
+        article.appendChild(h2);
+        article.appendChild(p1);
+        article.appendChild(p2);
+        article.appendChild(p3);
+        article.appendChild(uList);
+
+        section.appendChild(article);
+    }
 }
